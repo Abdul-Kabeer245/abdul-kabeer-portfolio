@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Clean focus ring — only shows on keyboard nav, not mouse clicks */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Text selection color */
+::selection {
+  background-color: #bfdbfe;
+  color: #1e3a5f;
+}
