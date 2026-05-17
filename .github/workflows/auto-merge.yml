@@ -1,34 +1,36 @@
 name: Auto Merge Dev -> Main -> Prod
 
 on:
-    push:
-        branches:
-            - dev
-            
+  push:
+    branches:
+      - dev
 
 jobs:
-    merge:
-        runs-on: ubuntu-latest
-        steps:
-            - name: checkout repository
-              uses: actions/checkout@v4
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Configure Git
-              run: |
-                  git config --global user.name "github-actions"
-                  git config --global user.email "github-actions@github.com"
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
 
-            - name: Merge dev -> main
-              run: |
-                  git fetch origin
-                  git checkout main
-                  git pull origin main
-                  git merge origin/dev --allow-unrelated-histories
-                  git push origin main
+      - name: Merge dev -> main
+        run: |
+          git fetch origin
+          git checkout main
+          git pull origin main
+          git merge origin/dev --no-edit -X theirs
+          git push origin main
 
-            - name: Merge main -> prod
-              run: |
-                  git checkout prod
-                  git pull origin prod
-                  git merge origin/main --allow-unrelated-histories
-                  git push origin prod
+      - name: Merge main -> prod
+        run: |
+          git checkout prod
+          git pull origin prod
+          git merge origin/main --no-edit -X theirs
+          git push origin prod
