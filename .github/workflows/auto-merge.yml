@@ -23,12 +23,12 @@ jobs:
                   git fetch origin
                   git checkout main
                   git pull origin main
-                  git merge origin/dev
+                  git merge origin/dev --allow-unrelated-histories
                   git push origin main
 
             - name: Merge main -> prod
               run: |
                   git checkout prod
                   git pull origin prod
-                  git merge origin/main
+                  git merge origin/main --allow-unrelated-histories
                   git push origin prod
