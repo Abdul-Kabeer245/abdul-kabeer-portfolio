@@ -15,7 +15,6 @@ function Navbar({ name, active, darkMode, setDarkMode }) {
           href="#home"
           className="text-lg font-bold text-blue-600 dark:text-blue-400 hover:opacity-80 transition-opacity"
         >
-          AK test pipeline
         </a>
 
         <div className="flex items-center gap-5">
